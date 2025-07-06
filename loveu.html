@@ -1,0 +1,121 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Lời Yêu Thương Pháo Hoa</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000; /* Nền đen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            cursor: pointer; /* Hiển thị con trỏ là bàn tay để gợi ý click */
+        }
+
+        .love-bubble {
+            position: absolute;
+            font-family: 'Arial Black', sans-serif;
+            font-weight: bold;
+            font-size: 20px; /* Kích thước ban đầu của chữ */
+            opacity: 0; /* Ẩn ban đầu */
+            transform: translate(-50%, -50%) scale(0); /* Ẩn và thu nhỏ ban đầu */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Hiệu ứng chuyển động mượt */
+            pointer-events: none; /* Không chặn các sự kiện click khác */
+            user-select: none; /* Không cho phép chọn chữ */
+            z-index: 1000; /* Đảm bảo chữ nổi lên trên */
+        }
+
+        /* Keyframes cho hiệu ứng nổ và bay lên */
+        @keyframes fadeOutAndFly {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.5); /* Bắt đầu nổ */
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -300%) scale(1.5); /* Bay lên và mờ dần */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: white; font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 5vw; text-align: center; position: absolute;">Chạm vào màn hình để nhận lời yêu!</h1>
+
+    <script>
+        const loveMessages = ["I LOVE YOU ❤", "YOU ARE THE BEST ✨", "FOREVER AND EVER 🥰", "MY HEART IS YOURS 💖", "SOULMATE 💘", "LOVE U! 😍"];
+        const colors = ['#FF69B4', '#FFD700', '#ADFF2F', '#00BFFF', '#EE82EE', '#FF4500', '#00FFFF']; // Màu sắc đa dạng
+
+        document.body.addEventListener('click', function(event) {
+            // Lấy tọa độ click
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // Tạo hiệu ứng bong bóng/chữ nổ
+            for (let i = 0; i < 15; i++) { // Bắn ra 15 chữ mỗi lần click
+                createLoveBubble(mouseX, mouseY);
+            }
+        });
+
+        function createLoveBubble(x, y) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('love-bubble');
+
+            // Chọn ngẫu nhiên một thông điệp
+            bubble.textContent = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            // Chọn ngẫu nhiên một màu
+            bubble.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Đặt vị trí ban đầu (nơi click)
+            bubble.style.left = `${x}px`;
+            bubble.style.top = `${y}px`;
+
+            document.body.appendChild(bubble);
+
+            // Kích hoạt animation
+            setTimeout(() => {
+                const randomX = (Math.random() - 0.5) * 400; // Ngẫu nhiên từ -200 đến 200
+                const randomY = (Math.random() - 0.5) * 400; // Ngẫu nhiên từ -200 đến 200
+
+                bubble.style.opacity = 1;
+                bubble.style.transform = `translate(${randomX}px, ${randomY}px) scale(1)`;
+
+                // Bắt đầu hiệu ứng bay lên và mờ dần sau một khoảng thời gian ngắn
+                bubble.style.animation = `fadeOutAndFly ${2 + Math.random() * 1}s forwards ease-out`;
+                bubble.style.fontSize = `${20 + Math.random() * 30}px`; // Kích thước ngẫu nhiên
+
+                // Xóa phần tử sau khi animation kết thúc để tránh làm nặng DOM
+                bubble.addEventListener('animationend', () => {
+                    bubble.remove();
+                });
+            }, 10); // Cho phép trình duyệt render ban đầu trước khi kích hoạt animation
+        }
+
+        // Tự động tạo hiệu ứng liên tục (không cần click)
+        // setInterval(() => {
+        //     const randomX = Math.random() * window.innerWidth;
+        //     const randomY = Math.random() * window.innerHeight;
+        //     for (let i = 0; i < 5; i++) { // Bắn ra 5 chữ mỗi lần
+        //         createLoveBubble(randomX, randomY);
+        //     }
+        // }, 1000); // Mỗi 1 giây
+    </script>
+</body>
+</html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
